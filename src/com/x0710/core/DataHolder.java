@@ -1,33 +1,30 @@
 package com.x0710.core;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 
-public class DataHolder {
+public class DataHolder extends ArrayList<DataLine> {
 
     private final Random random = new Random();
-    private final ArrayList<DataLine> dataCollect;
 
-    public DataHolder(File data) {
-        dataCollect = new ArrayList<>();
-        Properties p = new Properties();
-        try (FileReader fr = new FileReader(data)) {
-            p.load(fr);
-        }catch (IOException e) {
+    public DataHolder(File data, String splitChar) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(data)))) {
+            for (String buf;(buf = br.readLine())!= null;) {
+                String[] s = buf.split(splitChar);
+                add(new DataLine(s[0], s[1]));
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        p.forEach((v1,v2)->{
-            dataCollect.add(new DataLine((String)v1,(String)v2));
-        });
-
 //        System.out.println("DataHolder 构造完成");
     }
     public boolean addLine(DataLine data) {
-        return this.dataCollect.add(data);
+        return add(data);
     }
     public DataLine random() {
-       return dataCollect.get(random.nextInt(dataCollect.size()-1));
+       return this.get(random.nextInt(this.size()));
     }
 }
