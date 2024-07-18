@@ -2,6 +2,9 @@ package com.x0710.sql;
 
 import com.x0710.core.DataHolder;
 import com.x0710.core.DataLine;
+import com.x0710.ui.GameArea;
+import com.x0710.ui.MainStage;
+import javafx.application.Application;
 
 import java.io.File;
 import java.net.URL;
@@ -9,13 +12,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        URL is = Thread.currentThread().getContextClassLoader()
-                        .getResource("resources/questions");
-        File file = new File(is.getFile());
-//        System.out.println(file.exists());
-        DataHolder dh = new DataHolder(file, "=");
+//        URL is = Thread.currentThread().getContextClassLoader()
+//                        .getResource("resources/questions");
+//        File file = new File(is.getFile());
+////        System.out.println(file.exists());
+//        DataHolder dh = new DataHolder(file, "=");
+//
 
-        gamemode(dh);
+        Application.launch(MainStage.class, args);
 
     }
     public static void gamemode(DataHolder dh) {
