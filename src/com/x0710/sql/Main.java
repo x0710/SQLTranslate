@@ -12,15 +12,7 @@ import java.util.Scanner;
 public class Main {
     public static DataHolder ques;
     public static void main(String[] args) {
-        URL is = Thread.currentThread().getContextClassLoader()
-                        .getResource("resources/questions");
-        File file = new File(is.getFile());
-////        System.out.println(file.exists());
-        ques = new DataHolder(file, "=");
-//
-
-        Application.launch(GameStage.class);
-
+        Application.launch(GameStage.class, args);
     }
     public static void gamemode(DataHolder dh) {
         Scanner sc = new Scanner(System.in);
@@ -33,5 +25,13 @@ public class Main {
             boolean correct = que.checkAns(youAns);
             System.out.println(correct);
         }
+    }
+    static {
+
+        URL is = Thread.currentThread().getContextClassLoader()
+                .getResource("resources/questions");
+        File file = new File(is.getFile());
+////        System.out.println(file.exists());
+        ques = new DataHolder(file, "=");
     }
 }
